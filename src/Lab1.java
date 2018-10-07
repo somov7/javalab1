@@ -35,11 +35,11 @@ public class Lab1 {
         readFractions(fileName);
         Polynomial[] polynomial = new Polynomial[2];
 
-        fracSet[0].print();
+        System.out.println(fracSet[0].toString());
         System.out.println("fractions greater than 1: " + fracSet[0].countGreater(new Fraction(1, 1)));
         System.out.println("max = " + fracSet[0].max().evaluate() + " min = " + fracSet[0].min().evaluate() + "\n");
 
-        fracSet[1].print();
+        System.out.println(fracSet[1].toString());
         System.out.println("fractions less than 1: " + fracSet[1].countLess(new Fraction(1, 1)));
         System.out.println("max = " + fracSet[1].max().evaluate() + " min = " + fracSet[1].min().evaluate() + "\n");
 
@@ -47,6 +47,6 @@ public class Lab1 {
             polynomial[i] = new Polynomial(fracSet[i]);
         polynomial[1].append(new Fraction(34, 55));
         polynomial[0].add(polynomial[1]);
-        System.out.println(polynomial[0].evaluate(1));
+        System.out.println(polynomial[0].toString());
     }
 }

@@ -2,13 +2,11 @@ import java.util.List;
 import java.util.ArrayList;
 
 public class FractionSet {
-    List<Fraction> data;
-    Fraction minFrac, maxFrac, lastChecked = null;
-    int lastCount;
+    List<Fraction> data = new ArrayList<Fraction>();
+    Fraction minFrac, maxFrac, lastCheckedLess = null, lastCheckedGreater = null;
+    int lastCountLess, LastCountGreater;
 
-    public FractionSet(){
-        data = new ArrayList<Fraction>();
-    }
+    public FractionSet(){}
 
     public List<Fraction> getData(){
         return data;
@@ -24,7 +22,8 @@ public class FractionSet {
                 maxFrac = frac;
         }
         data.add(frac);
-        lastChecked = null;
+        lastCheckedLess = null;
+        lastCheckedGreater = null;
     }
 
     public Fraction max(){
@@ -40,29 +39,34 @@ public class FractionSet {
     }
 
     public int countGreater(Fraction frac){
+        if(lastCheckedLess != null && frac.cmp(lastCheckedLess) == 0)
+            return lastCountLess;
         int cnt = 0;
         for(Fraction fr: data){
             if(fr.cmp(frac) == 1)
                 cnt++;
         }
-        return cnt;
+        lastCheckedLess = new Fraction(frac);
+        return lastCountLess = cnt;
     }
 
     public int countLess(Fraction frac){
-        if(lastChecked != null && frac.cmp(lastChecked) == 0)
-            return lastCount;
+        if(lastCheckedLess != null && frac.cmp(lastCheckedLess) == 0)
+            return lastCountLess;
         int cnt = 0;
         for(Fraction fr: data){
             if(fr.cmp(frac) == -1)
                 cnt++;
         }
-        lastChecked = new Fraction(frac);
-        return lastCount = cnt;
+        lastCheckedLess = new Fraction(frac);
+        return lastCountLess = cnt;
     }
 
-    public void print(){
+    public String toString(){
+        String ret = new String();
         for(Fraction fr: data)
-            System.out.println(fr.getNum() + " / " + fr.getDenum() + " = " + fr.evaluate());
+            ret += fr.toString() + "\n";
+        return ret;
     }
 
 }

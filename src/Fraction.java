@@ -45,6 +45,10 @@ public class Fraction {
         return (int) Math.signum(evaluate() - that.evaluate());
     }
 
+    public String toString(){
+        return new String(num + " / " + denum);
+    }
+
     private int gcd(int first, int second){
         first = Math.abs(first);
         second = Math.abs(second);
@@ -68,4 +72,6 @@ public class Fraction {
         num /= g;
         denum /= g;
     }
+
+
 }
